@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Sidebar from '../Components/Sidebar'
 
-const Dashboard = () => {
-
+const Transaction = () => {
   return (
+
     <div className='flex h-screen w-screen overflow-hidden'>
         <Sidebar/>
         <div className='flex justify-center items-center p-10 h-full w-full'>
             <div className='h-full w-full'>
-              <h1>Dashboard</h1>
+                <h1>Transaction</h1>
             </div>
         </div>
     </div>
   )
 }
 
-export default Dashboard
+export default Transaction
