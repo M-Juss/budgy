@@ -23,6 +23,8 @@ const Sidebar = () => {
             <h1 className='text-center font-medium text-3xl py-3.5'>Budgy</h1>
             {sideBar.map((item, index) => {
                 const isActive = location.pathname == item.link
+                
+                console.log(item.link, location.pathname)
                 return(
                     <Link to={item.link} key={index}>
                     <div

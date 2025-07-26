@@ -12,7 +12,7 @@ function App() {
           <Route path='/' element={<Dashboard/>}/>
           <Route path='/transaction' element={<Transaction/>}/>
           <Route path='/history' element={<History/>}/>
-          <Route path='/setting' element={<Settings/>}/>
+          <Route path='/settings' element={<Settings/>}/>
         </Routes>
       </Router>
     
