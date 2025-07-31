@@ -14,9 +14,24 @@ const Transaction = () => {
 
   const type = watch('type'); // Watch the type field
 
-  const onSubmit = (data) => {
-    console.log('Form Data:', data);
-    reset();
+  const onSubmit = async (data) => {
+    try{
+      const response = await fetch("http://localhost:5050/api/transaction", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json()
+      console.log("Saved", result)
+
+      reset()
+    } catch (err){
+        console.error('Error submitting transaction', err)
+    }
+
   };
 
   const incomeCategories = [
