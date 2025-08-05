@@ -21,6 +21,8 @@ const TransactionList = () => {
 let lastDate = null; // track the last displayed date outside the map
 
 return (
+  <>
+  <h1 className='text-3xl font-medium mb-3'>Transaction History</h1>
   <div className="w-full h-80 overflow-y-scroll border rounded-xl px-5 pb-5">
     {transactions.map((tx) => {
       const showDate = tx.date !== lastDate;
@@ -57,6 +59,8 @@ return (
       );
     })}
   </div>
+  </>
+
 );
 
 };

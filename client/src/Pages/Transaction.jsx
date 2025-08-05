@@ -56,7 +56,7 @@ const Transaction = () => {
             onSubmit={handleSubmit(onSubmit)}
             className='grid grid-cols-2 gap-y-5 w-full pt-5'
           >
-            {/* Amount Input */}
+
             <div className="mr-4 w-full">
               <label className="input validator w-full flex items-center gap-2">
                 <FaPesoSign size={20} className="opacity-50" />
@@ -97,7 +97,7 @@ const Transaction = () => {
             </div>
 
             {/* Dynamic Category Select */}
-            <div className='mr-4'>
+            <div className='mr-4 w-full'>
               <select
                 defaultValue=""
                 disabled={!type}

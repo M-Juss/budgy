@@ -18,35 +18,36 @@ const Sidebar = () => {
     ]
 
   return (
-            <sidebar className='flex flex-col h-full w-70 border-r-1 '> 
+        <aside className='flex flex-col w-[250px] h-screen sticky top-0 border-r-1 '> 
             <h1 className='text-center font-medium text-3xl py-3.5'>Budgy</h1>
-            {sideBar.map((item, index) => {
-                const isActive = location.pathname == item.link
-                return(
-                    <Link to={item.link} key={index}>
-                    <div
-                    className={`flex w-full px-4 py-3 gap-x-3  hover:bg-yellow-900 my-1 ${
-                        isActive
-                        ? 'duration-200 hover:bg-yellow-950 bg-yellow-950'
-                        : ''
-                        }`}
-                     >
-                    {isActive && (
-                    <>
-                        <div className=' absolute left-0 h-8 w-1 bg-white'></div>
-                    </>)}
-                    <span>{item.icon}</span>
-                    <span className='text-md my-auto text-accent-content'>{item.label}</span>
-                    </div>
-                    </Link>
-                )
-            })}
-
-            <div className='flex w-full px-4 py-1 gap-x-3 hover:bg-yellow-900 mt-95'>
+            <div className="flex-1">
+                {sideBar.map((item, index) => {
+                    const isActive = location.pathname == item.link
+                    return(
+                        <Link to={item.link} key={index}>
+                        <div
+                        className={`flex w-full px-4 py-3 gap-x-3  hover:bg-yellow-900 my-1 ${
+                            isActive
+                            ? 'duration-200 hover:bg-yellow-950 bg-yellow-950'
+                            : ''
+                            }`}
+                        >
+                        {isActive && (
+                        <>
+                            <div className=' absolute left-0 h-8 w-1 bg-white'></div>
+                        </>)}
+                        <span>{item.icon}</span>
+                        <span className='text-md my-auto text-accent-content'>{item.label}</span>
+                        </div>
+                        </Link>
+                    )
+                })}
+            </div>
+            <div className='flex w-full px-4 py-1 gap-x-3 hover:bg-yellow-900'>
                 <IoLogOutSharp className=' my-auto' size={30}/>
                 <span className='text-md my-auto text-accent-content'>Logout</span>
             </div>
-        </sidebar>
+        </aside>
   )
 }
 
