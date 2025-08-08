@@ -15,6 +15,13 @@ const Transaction = () => {
   const type = watch('type'); // Watch the type field
 
   const onSubmit = async (data) => {
+
+  const rawDate = new Date (data.date)
+  const option = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+  const formattedDate = rawDate.toLocaleDateString('en-US', option )
+  
+  data.date = formattedDate
+
     try{
       const response = await fetch("http://localhost:5050/api/transaction", {
         method: 'POST',
