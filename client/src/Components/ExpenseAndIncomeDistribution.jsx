@@ -9,7 +9,7 @@ const ExpenseDistribution = () => {
     useEffect(() => {
         const getExpenseThisMonth = async () => {
             try{
-                const result = await fetch("http://localhost:5050/api/transaction/expense", {
+                const result = await fetch("http://localhost:5050/api/transaction/monthly_expense", {
                     method: 'GET'
                 })
                 const data = await result.json();
@@ -24,7 +24,7 @@ const ExpenseDistribution = () => {
     useEffect(() => {
         const getIncomeThisMonth = async () => {
             try{
-                const result = await fetch("http://localhost:5050/api/transaction/income", {
+                const result = await fetch("http://localhost:5050/api/transaction/monthly_income", {
                     method: "GET"
                 })
                 const data = await result.json()

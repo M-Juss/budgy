@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Sidebar from '../Components/Sidebar';
 import { FaPesoSign } from "react-icons/fa6";
 
-const Transaction = () => {
+const Transaction = ({setTransactionSuccessful}) => {
   const {
     register,
     handleSubmit,
@@ -16,12 +16,6 @@ const Transaction = () => {
 
   const onSubmit = async (data) => {
 
-  const rawDate = new Date (data.date)
-  const option = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
-  const formattedDate = rawDate.toLocaleDateString('en-US', option )
-  
-  data.date = formattedDate
-
     try{
       const response = await fetch("http://localhost:5050/api/transaction", {
         method: 'POST',
@@ -33,6 +27,10 @@ const Transaction = () => {
 
       const result = await response.json()
       console.log("Saved", result)
+
+      setTransactionSuccessful('Transaction added successfully!')
+
+      setTimeout(() => setTransactionSuccessful(''), 3000)
 
       reset()
     } catch (err){
@@ -54,10 +52,7 @@ const Transaction = () => {
   const categories = type === 'Income' ? incomeCategories : type === 'Expense' ? expenseCategories : [];
 
   return (
-    <div className='flex h-screen w-screen overflow-hidden'>
-      <Sidebar />
-      <div className='flex justify-center items-center p-10 h-full w-full'>
-        <div className='h-full w-full'>
+    <>
           <h1 className='text-3xl font-medium'>Add Transaction</h1>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -158,9 +153,8 @@ const Transaction = () => {
               </button>
             </div>
           </form>
-        </div>
-      </div>
-    </div>
+    </>
+
   );
 };
 

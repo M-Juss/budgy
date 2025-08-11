@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BarChart, CartesianGrid, Tooltip, Bar, XAxis, YAxis, Legend } from 'recharts'
 
 const IncomeVsExpense = () => {
@@ -40,6 +40,26 @@ const IncomeVsExpense = () => {
     "pv": 4300
   }
 ]
+
+// useEffect(() => {
+//   const Test = () =>{
+//     const now = new Date();
+
+// // Compute the first day of this week (Sunday)
+// const firstDayOfWeek = new Date(now);
+// firstDayOfWeek.setDate(now.getDate() - now.getDay()); // getDay() gives 0-6 (Sun-Sat)
+// firstDayOfWeek.setHours(0,0,0,0); // reset time to midnight
+
+// // Compute the last day of this week (Saturday)
+// const lastDayOfWeek = new Date(firstDayOfWeek);
+// lastDayOfWeek.setDate(firstDayOfWeek.getDate() + 6);
+// lastDayOfWeek.setHours(23,59,59,999); // end of day
+
+// console.log("Start of week:", firstDayOfWeek);
+// console.log("End of week:", lastDayOfWeek);
+//   }
+//   Test()
+// }, [])
 
   return (
     <div>
