@@ -36,8 +36,8 @@ router.get("/transaction/weekly_expense&income", async (req, res) => {
   lastDayOfWeek.setDate(firstDayOfWeek.getDate() + 6); // Saturday as end
   lastDayOfWeek.setHours(23, 59, 59, 999);
 
-  // Day names starting with Monday
-  const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  // Day names starting with Sunday
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   try {
     const aggregated = await collection.aggregate([
