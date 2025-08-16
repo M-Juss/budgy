@@ -7,9 +7,8 @@ const Dashboard = () => {
 
   return (
       <div className='flex flex-col pb-10 space-y-5'>
-          <IncomeVsExpense/>
           <ExpenseAndIncomeDistribution/>
-          <TransactionList/>
+          <IncomeVsExpense/>
       </div>
   )
 }

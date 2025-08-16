@@ -22,17 +22,23 @@ useEffect(() => {
 }, [])
 
   return (
-    <div>
-      <BarChart width={730} height={250} data={weeklyIncomeAndExpense}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="day" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="income" fill="#8884d8" />
-        <Bar dataKey="expense" fill="#82ca9d" />
-    </BarChart>
+    <div className='flex flex-col'>
+      <h1 className='text-3xl font-medium mb-3'>
+        Weekly Income VS. Expense Projections
+      </h1>
+      <div className='flex justify-center items-center border-1 py-10 rounded-xl'>
+        <BarChart width={1000} height={300} data={weeklyIncomeAndExpense}>
+          <CartesianGrid strokeDasharray="4 1" fill='' />
+          <XAxis dataKey="day" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="income" fill="#8884d8" />
+          <Bar dataKey="expense" fill="#82ca9d" />
+        </BarChart>
+      </div>
     </div>
+
   )
 }
 

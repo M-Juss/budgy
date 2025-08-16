@@ -1,10 +1,10 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar'
+import TransactionList from '../Components/TransactionList'
 
 const History = () => {
   return (
-    <h1>History</h1>
-
+      <TransactionList/>
   )
 }
 
