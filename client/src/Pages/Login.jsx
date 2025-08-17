@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FaUserAlt } from "react-icons/fa";
 import { FaLock } from "react-icons/fa6";
 import { LuEye, LuEyeClosed } from "react-icons/lu";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -53,7 +54,7 @@ const Login = () => {
           {/* Signup Redirect */}
           <div className='flex space-x-1 justify-center '>
             <span className='text-md md:text-sm'>Don't have an account?</span>
-            <span className='hover:underline cursor-pointer text-md md:text-sm'>Sign up</span>
+            <span className='hover:underline cursor-pointer text-md md:text-sm'><Link to='/signup'>Sign up</Link></span>
           </div>
         </div>
       </div>
