@@ -21,10 +21,25 @@ const Signup = () => {
   // watch password for confirmPassword validation
   const password = watch("password");
 
-  const onSubmit = (data) => {
-    console.log("Form submitted:", data);
-    reset(); // clear form after submit
-    alert("Signup successful!");
+  const onSubmit = async (data) => {
+
+    try{
+      const response = await fetch("http://localhost:5050/api/signup", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(response)
+      })
+
+      const result = await response.json()
+      console.log("Saved", result)
+      
+    reset(); 
+    
+    } catch (err){
+      console.error("Error creating new user: ", err)
+    }
   };
 
   return (
