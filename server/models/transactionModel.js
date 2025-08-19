@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
 const transactionSchema = new mongoose.Schema({
   amount: { type: Number, required: true },

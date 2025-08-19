@@ -1,7 +1,20 @@
 import express from 'express'
-import Transaction from '../models/budgyModel.js'
+import Transaction from '../models/transactionModel.js'
+import User from '../models/userModel.js'
 
 const router = express.Router()
+
+// create new user
+router.post("/signup", async (req, res) => {
+  try{
+    const newUser = new User(req.body)
+    const result = await newUser.save()
+    res.status(201).json({message: "New user added successfully!", id: result._id})
+  } catch (err){
+    console.error("Insert error:", err)
+    res.status(500).json({ message: "Something went wrong" })
+  }
+})
 
 // Create a new transaction
 router.post("/transaction", async (req, res) => {
