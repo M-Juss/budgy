@@ -2,7 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv';
 import connectDB from './db/connection.js';
-import userData from './routes/userData.js';
+import userRoutes from './routes/userRoutes.js';
+import transactionRoutes from './routes/transactionRoutes.js'
 
 dotenv.config();
 
@@ -12,7 +13,8 @@ const port = process.env.PORT || 5050
 app.use(cors())
 app.use(express.json())
 
-app.use("/api", userData);
+app.use("/api", userRoutes);
+app.use("/api", transactionRoutes);
 
 connectDB();
 
