@@ -17,3 +17,5 @@ next()
 userSchema.methods.comparePassword = async function (candidate) { //uses function since we are getting local this.
 return bcrypt.compare(candidate, this.password)
 }
+
+export default mongoose.model("User", userSchema);

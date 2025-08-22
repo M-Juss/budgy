@@ -13,7 +13,7 @@ router.post("/transaction", createTransaction)
 
 router.get("/transaction", getTransaction)
 
-router.get("/transaction/weekly_expense&income", getWeeklyExpenseAndIncome)
+router.get("/transaction/weekly_expense_income", getWeeklyExpenseAndIncome)
 
 router.get("/transaction/monthly_expense", getMonthlyExpense)
 
