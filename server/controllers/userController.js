@@ -23,7 +23,7 @@ export const signup = async (req,res) => {
 export const login = async (req, res) => {
   try{
     const {email, password} = req.body
-    const user = await User.findOne({email}) // find email user inputed
+    const user = await User.findOne({email}) // find email user inputted
     if(!user) return res.status(400).json({message: 'Invalid Email'}) 
 
     const ok = await user.comparePassword(password) // validate password to converted stored hashed password
