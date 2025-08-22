@@ -1,12 +1,12 @@
 import mongoose, { mongo } from "mongoose";
 
 const transactionSchema = new mongoose.Schema({
-  amount: { type: Number, required: true },
-  type: { type: String, required: true }, // income or expense
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true}, // add objectId which is foreign key to the User Schema
+  amount: { type: Number, required: true, min: 0 }, // add min 0
+  type: { type: String, enum: ['Income', 'Expense'], required: true }, // add enum whic hare the expected value
   category: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  description: { type: String, default: "" }
+  description: { type: String, trim:true, default: "" } // trim string values
 });
 
-// 👇 this will create a "transactions" collection inside budgy DB
 export default mongoose.model("Transaction", transactionSchema);

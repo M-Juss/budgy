@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv';
+import morgan from 'morgan'
 import connectDB from './db/connection.js';
 import userRoutes from './routes/userRoutes.js';
 import transactionRoutes from './routes/transactionRoutes.js'
@@ -10,8 +11,9 @@ dotenv.config();
 const app = express()
 const port = process.env.PORT || 5050
 
-app.use(cors())
+app.use(cors({origin: process.env.CORS_ORIGIN, credentials:true}))
 app.use(express.json())
+app.use(morgan('dev'))
 
 app.use("/api", userRoutes);
 app.use("/api", transactionRoutes);
