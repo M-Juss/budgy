@@ -8,7 +8,7 @@ const [weeklyIncomeAndExpense, setWeeklyIncomeAndExpense] = useState([])
 useEffect(() => {
   const getIncomeAndExpense = async () =>{
     try{
-      const result = await fetch('http://localhost:5050/api/transaction/weekly_expense&income', {
+      const result = await fetch('http://localhost:5050/api/transaction/weekly_expense_income', {
         method: 'GET'
       })
       const data = await result.json()
