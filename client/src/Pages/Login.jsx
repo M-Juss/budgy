@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaUserAlt } from "react-icons/fa";
 import { FaLock } from "react-icons/fa6";
 import { LuEye, LuEyeClosed } from "react-icons/lu";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 const Login = () => {
@@ -16,11 +16,33 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword((prev) => !prev);
 
-  const onSubmit = (data) => {
+  const navigate = useNavigate()
+
+  const onSubmit = async (data) => {
     console.log("Login data:", data);
-    reset();
-    alert("Login successful!"); 
-    // later you can redirect with useNavigate()
+    try{
+      const response = await fetch("http://localhost:5050/api/login", {
+        method: 'POST',
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data)
+      })
+        const result = response.json()
+        
+        if(!response.ok){
+        alert(result.message || "Login failed!");
+        return;
+        }
+
+        localStorage.setItem("token", result.token);
+        reset();
+        alert("Login successful!");
+        navigate("/dashboard");
+
+    }catch(error){
+      console.error("Internal service error: ", error)
+    }
   };
 
   return (
@@ -42,10 +64,10 @@ const Login = () => {
               <FaUserAlt/> 
               <input
                 type="text"
-                placeholder="Username"
+                placeholder="Email"
                 className='font-semibold'
-                {...register("username", {
-                  required: "Username is required.",
+                {...register("email", {
+                  required: "Email is required.",
                 })}
               /> 
             </label>

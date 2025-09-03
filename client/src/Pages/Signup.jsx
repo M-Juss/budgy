@@ -3,7 +3,7 @@ import { MdEmail } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
 import { FaLock } from "react-icons/fa6";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 const Signup = () => {
@@ -20,22 +20,28 @@ const Signup = () => {
 
   // watch password for confirmPassword validation
   const password = watch("password");
+  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
-
     try{
       const response = await fetch("http://localhost:5050/api/signup", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(response)
+        body: JSON.stringify(data)
       })
 
       const result = await response.json()
-      console.log("Saved", result)
       
-    reset(); 
+      if(!response.ok){
+        alert(result.message || "Sign-up failed!")
+        return;
+      }
+
+      console.log("Saved", result)
+      reset();
+      navigate("/login")
     
     } catch (err){
       console.error("Error creating new user: ", err)

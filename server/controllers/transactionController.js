@@ -10,9 +10,9 @@ import Transaction from '../models/transactionModel.js'
 
 export const createTransaction = async (req, res) => {
     try {
-        const newTransaction = new Transaction(req.body)
+        const newTransaction = new Transaction({...req.body, userId: req.user.id})
         const result = await newTransaction.save()
-        res.status(201).json({ message: "Transaction added successfully!", id: result._id })
+        res.status(201).json({ message: "Transaction added successfully!", id: newTransaction._id })
     } catch (err) {
         console.error("Insert error:", err)
         res.status(500).json({ message: "Something went wrong" })
@@ -21,7 +21,7 @@ export const createTransaction = async (req, res) => {
 
 export const getTransaction = async (req, res) => {
     try {
-        const result = await Transaction.find({})
+        const result = await Transaction.find({ userId: req.user.id}).sort({date: -1}) // date descending
         res.status(200).json(result)
     } catch (error) {
         console.error("Error fetching transactions:", error)
@@ -45,6 +45,7 @@ export const getWeeklyExpenseAndIncome = async (req, res) => {
         const aggregated = await Transaction.aggregate([
         {
             $match: {
+            userId: Transaction.db.base.Types.ObjectId.createFromHexString(req.user.id),
             date: { $gte: firstDayOfWeek, $lte: lastDayOfWeek }
             }
         },
@@ -103,7 +104,7 @@ export const getMonthlyExpense = async (req, res) => {
     
     try {
         const result = await Transaction.aggregate([
-        { $match: { type: "Expense" } },
+        { $match: { usedId: Transaction.db.base.Types.ObjectId.createFromHexString(req.user.id), type: "Expense" } },
         { $addFields: { month: { $month: "$date" }, year: { $year: "$date" } } },
         { $match: { month: currentMonth, year: currentYear } },
         { $group: { _id: "$category", totalAmount: { $sum: "$amount" } } },
@@ -124,7 +125,7 @@ export const getMonthlyIncome = async (req, res) => {
 
     try {
         const result = await Transaction.aggregate([
-        { $match: { type: "Income" } },
+        { $match: { usedId: Transaction.db.base.Types.ObjectId.createFromHexString(req.user.id), type: "Income" } },
         { $addFields: { month: { $month: "$date" }, year: { $year: "$date" } } },
         { $match: { month: currentMonth, year: currentYear } },
         { $group: { _id: "$category", totalAmount: { $sum: "$amount" } } },
