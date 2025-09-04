@@ -35,7 +35,7 @@ const Signup = () => {
       const result = await response.json()
       
       if(!response.ok){
-        alert(result.message || "Sign-up failed!")
+        alert("Sign-up failed!")
         return;
       }
 

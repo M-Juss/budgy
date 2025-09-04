@@ -31,7 +31,7 @@ const Login = () => {
         const result = response.json()
         
         if(!response.ok){
-        alert(result.message || "Login failed!");
+        alert("Login failed!");
         return;
         }
 

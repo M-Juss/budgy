@@ -16,7 +16,7 @@ function App() {
     <Router>
       <Routes>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/signup" element={<Signup/>}/>
+      <Route path="/" element={<Signup/>}/>
 
       <Route
         path='/*' 
@@ -26,7 +26,7 @@ function App() {
           <div className='flex justify-center items-center p-10 h-full w-full'>
             <div className='h-full w-full'>
               <Routes>
-                <Route path='/' element={<Dashboard />} />
+                <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/transaction' element={<Transaction setTransactionSuccessful={setTransactionSuccessful} />} />
                 <Route path='/history' element={<History />} />
                 <Route path='/settings' element={<Settings />} />

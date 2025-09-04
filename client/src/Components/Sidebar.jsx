@@ -9,7 +9,7 @@ import { IoLogOutSharp } from "react-icons/io5";
 const Sidebar = () => {
     const location = useLocation()
     const sideBar = [
-        {label:'Dashboard', icon: <MdDashboard className=' my-auto ' size={30}/>, link:'/'},
+        {label:'Dashboard', icon: <MdDashboard className=' my-auto ' size={30}/>, link:'/dashboard'},
         {label:'Add Transaction', icon: <IoIosAddCircle className=' my-auto ' size={30}/>, link:'/transaction'},
         {label:'History', icon: <RiChatHistoryFill className=' my-auto ' size={30}/>, link:'/history'},
         {label: 'Settings', icon:<IoMdSettings className=' my-auto' size={30}/>, link: '/settings' },
