@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {PieChart, Pie, Legend, Tooltip} from 'recharts'
+import api from "../Utils/api"
 
 const ExpenseDistribution = () => {
 
@@ -9,11 +10,8 @@ const ExpenseDistribution = () => {
     useEffect(() => {
         const getExpenseThisMonth = async () => {
             try{
-                const result = await fetch("http://localhost:5050/api/transaction/monthly_expense", {
-                    method: 'GET'
-                })
-                const data = await result.json();
-                setExpenseThisMonth(data)
+                const result = await api.get("/transaction/monthly_expense");
+                setExpenseThisMonth(result.data)
             } catch (error){
                 console.log("Error Message:", error)
             }  
@@ -24,11 +22,8 @@ const ExpenseDistribution = () => {
     useEffect(() => {
         const getIncomeThisMonth = async () => {
             try{
-                const result = await fetch("http://localhost:5050/api/transaction/monthly_income", {
-                    method: "GET"
-                })
-                const data = await result.json()
-                setIncomeThisMonth(data)
+                const result = await api.get("/transaction/monthly_income");
+                setIncomeThisMonth(result.data)
             } catch (error){
                 console.log("Error Message:", error)
             } 

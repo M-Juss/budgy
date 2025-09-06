@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import api from "../Utils/api"
 import { BarChart, CartesianGrid, Tooltip, Bar, XAxis, YAxis, Legend } from 'recharts'
 
 const IncomeVsExpense = () => {
@@ -8,11 +9,8 @@ const [weeklyIncomeAndExpense, setWeeklyIncomeAndExpense] = useState([])
 useEffect(() => {
   const getIncomeAndExpense = async () =>{
     try{
-      const result = await fetch('http://localhost:5050/api/transaction/weekly_expense_income', {
-        method: 'GET'
-      })
-      const data = await result.json()
-      setWeeklyIncomeAndExpense(data)
+      const result = await api.get('/transaction/weekly_expense_income');
+      setWeeklyIncomeAndExpense(result.data)
     } catch(error) {
       console.error(`Error message: ${error}`)
     }

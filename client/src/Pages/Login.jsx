@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaUserAlt } from "react-icons/fa";
 import { FaLock } from "react-icons/fa6";
 import { LuEye, LuEyeClosed } from "react-icons/lu";
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm} from 'react-hook-form';
+import api from '../Utils/api';
 
 const Login = () => {
   const {
@@ -18,32 +19,36 @@ const Login = () => {
 
   const navigate = useNavigate()
 
-  const onSubmit = async (data) => {
-    console.log("Login data:", data);
-    try{
-      const response = await fetch("http://localhost:5050/api/login", {
-        method: 'POST',
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(data)
-      })
-        const result = response.json()
-        
-        if(!response.ok){
-        alert("Login failed!");
-        return;
-        }
+  useEffect(() => {
+  const token = localStorage.getItem("budgy_token");
+  if (token) {
+    navigate("/dashboard");
+  }
+}, [navigate]);
 
-        localStorage.setItem("token", result.token);
-        reset();
-        alert("Login successful!");
-        navigate("/dashboard");
+const onSubmit = async (data) => {
+  console.log("Login data:", data);
+  try {
+    // send login request with data
+    const response = await api.post("/login", data);
 
-    }catch(error){
-      console.error("Internal service error: ", error)
+    // Axios returns data inside response.data
+    localStorage.setItem("budgy_token", response.data.token);
+
+    reset();
+    alert("Login successful!");
+    navigate("/dashboard");
+  } catch (error) {
+    if (error.response) {
+      // server responded with an error
+      alert(error.response.data.message || "Login failed!");
+    } else {
+      console.error("Internal service error:", error);
+      alert("Something went wrong!");
     }
-  };
+  }
+};
+
 
   return (
     <div className='h-full w-full flex justify-center items-center'>

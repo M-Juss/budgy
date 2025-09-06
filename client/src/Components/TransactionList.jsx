@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from "../Utils/api"
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
@@ -7,11 +8,8 @@ const TransactionList = () => {
   useEffect(() => {
     const getTransaction = async () => {
       try {
-        const result = await fetch('http://localhost:5050/api/transaction', {
-          method: 'GET',
-        });
-        const data = await result.json();
-        setTransactions(data);
+        const result = await api.get('/transaction');
+        setTransactions(result.data);
       } catch (err) {
         console.log('Fetch error:', err.message);
       }

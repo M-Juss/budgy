@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Sidebar from '../Components/Sidebar';
 import { FaPesoSign } from "react-icons/fa6";
+import api from '../Utils/api';
 
 const Transaction = ({setTransactionSuccessful}) => {
   const {
@@ -17,16 +18,8 @@ const Transaction = ({setTransactionSuccessful}) => {
   const onSubmit = async (data) => {
 
     try{
-      const response = await fetch("http://localhost:5050/api/transaction", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-
-      const result = await response.json()
-      console.log("Saved", result)
+     const response = await api.post("/transaction", data); // ✅ token auto-attached
+      console.log("Saved", response.data);
 
       setTransactionSuccessful('Transaction added successfully!')
 

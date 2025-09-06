@@ -104,7 +104,7 @@ export const getMonthlyExpense = async (req, res) => {
     
     try {
         const result = await Transaction.aggregate([
-        { $match: { usedId: Transaction.db.base.Types.ObjectId.createFromHexString(req.user.id), type: "Expense" } },
+        { $match: { userId: Transaction.db.base.Types.ObjectId.createFromHexString(req.user.id), type: "Expense" } },
         { $addFields: { month: { $month: "$date" }, year: { $year: "$date" } } },
         { $match: { month: currentMonth, year: currentYear } },
         { $group: { _id: "$category", totalAmount: { $sum: "$amount" } } },
@@ -125,7 +125,7 @@ export const getMonthlyIncome = async (req, res) => {
 
     try {
         const result = await Transaction.aggregate([
-        { $match: { usedId: Transaction.db.base.Types.ObjectId.createFromHexString(req.user.id), type: "Income" } },
+        { $match: { userId: Transaction.db.base.Types.ObjectId.createFromHexString(req.user.id), type: "Income" } },
         { $addFields: { month: { $month: "$date" }, year: { $year: "$date" } } },
         { $match: { month: currentMonth, year: currentYear } },
         { $group: { _id: "$category", totalAmount: { $sum: "$amount" } } },
